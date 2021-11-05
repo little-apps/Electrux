@@ -34,7 +34,7 @@ import 'bootstrap';
 import 'assets/scss/app.scss';
 import App from "App";
 
-console.log('👋 Hello from the renderer!');
+console.log('👋 Hello from the renderer side!');
 
 ReactDOM.render(
     <App />,

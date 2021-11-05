@@ -1,6 +1,6 @@
 import { ipcRenderer, contextBridge } from 'electron';
 
-console.log('👋 Hello from the preload script!');
+console.log('👋 Hello from the preload side!');
 
 // Define any functionality for the renderer to call in the main process.
 contextBridge.exposeInMainWorld("electron", {

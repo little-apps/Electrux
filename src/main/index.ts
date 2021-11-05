@@ -3,7 +3,7 @@ import unhandled from 'electron-unhandled';
 import { MainWindowController } from './controllers/MainWindowController';
 import { SettingsController } from './controllers/SettingsController';
 
-console.log('👋 Hello from the main process!');
+console.log('👋 Hello from the main side!');
 
 unhandled();
 
