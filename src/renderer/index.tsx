@@ -34,7 +34,7 @@ import 'bootstrap';
 import 'assets/scss/app.scss';
 import App from "App";
 
-console.log('👋 This message is being logged by "renderer.js", included via webpack');
+console.log('👋 Hello from the renderer!');
 
 ReactDOM.render(
     <App />,
