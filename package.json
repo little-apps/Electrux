@@ -1,0 +1,124 @@
+{
+    "name": "electrux",
+    "productName": "electrux",
+    "version": "1.0.0",
+    "description": "My Electrux application description",
+    "main": "./build/prod/main.js",
+    "scripts": {
+        "start:dev": "cross-env NODE_ENV=development npm run start",
+        "start:prod": "cross-env NODE_ENV=production npm run start",
+        "start": "ts-node --project scripts/tsconfig.json scripts/index.ts start",
+        "compile": "ts-node --project scripts/tsconfig.json scripts/index.ts compile",
+        "compile:dev": "cross-env NODE_ENV=development npm run compile -- all",
+        "compile:prod": "cross-env NODE_ENV=production npm run compile -- all",
+        "watch": "cross-env NODE_ENV=development npm run compile -- --watch=true all start",
+        "build": "cross-env NODE_ENV=production electron-builder build"
+    },
+    "author": {
+        "name": "Nick H",
+        "email": "nick@little-apps.com"
+    },
+    "license": "MIT",
+    "config": {
+        "electrux": {
+            "entries": {
+                "dev": "build/dev/main.js",
+                "prod": "build/prod/main.js"
+            },
+            "outDirs": {
+                "dev": "./build/dev",
+                "prod": "./build/prod"
+            },
+            "main": {
+                "webpackPath": "./webpack.main.config.ts",
+                "entry": "./src/main/index.ts",
+                "outDir": "./",
+                "tsConfigPath": "./src/main/tsconfig.json"
+            },
+            "preload": {
+                "webpackPath": "./webpack.preload.config.ts",
+                "entry": {
+                    "main": "./src/preload/main.ts"
+                },
+                "outDir": "./preloads",
+                "tsConfigPath": "./src/preload/tsconfig.json"
+            },
+            "renderer": {
+                "webpackPath": "./webpack.renderer.config.ts",
+                "entry": "./src/renderer/index.tsx",
+                "htmlTemplate": "./src/renderer/index.html",
+                "htmlOutput": "index.html",
+                "outDir": "./renderer",
+                "tsConfigPath": "./src/renderer/tsconfig.json"
+            }
+        }
+    },
+    "build": {
+        "appId": "electrux",
+        "mac": {
+            "category": "your.app.category.type"
+        },
+        "win": {
+            "target": "squirrel"
+        },
+        "files": [
+            "build/prod/**/*",
+            "package.json"
+        ],
+        "directories": {
+            "output": "./dist"
+        }
+    },
+    "devDependencies": {
+        "@types/bootstrap": "^5.1.6",
+        "@types/file-loader": "^5.0.1",
+        "@types/react": "^17.0.26",
+        "@types/react-dom": "^17.0.9",
+        "@types/react-redux": "^7.1.19",
+        "@types/react-router": "^5.1.16",
+        "@types/react-router-dom": "^5.3.0",
+        "@types/sass": "^1.43.0",
+        "@types/webpack-dev-server": "^4.3.1",
+        "@types/yargs": "^17.0.4",
+        "babel-loader": "^8.2.2",
+        "bootstrap": "^5.1.1",
+        "build-url-ts": "^6.1.0",
+        "connected-react-router": "^6.9.1",
+        "cross-env": "^7.0.3",
+        "css-loader": "^6.0.0",
+        "electron": "^15.3.0",
+        "electron-builder": "^22.13.1",
+        "electron-builder-squirrel-windows": "^22.14.5",
+        "electron-squirrel-startup": "^1.0.0",
+        "electron-unhandled": "^3.0.2",
+        "electroner": "^4.0.9",
+        "file-loader": "^6.2.0",
+        "html-webpack-plugin": "^5.4.0",
+        "react": "^17.0.2",
+        "react-bootstrap": "^2.0.0-rc.0",
+        "react-dom": "^17.0.2",
+        "react-icons": "^4.3.1",
+        "react-loaders": "^3.0.1",
+        "react-redux": "^7.2.5",
+        "react-router": "^5.0.0",
+        "react-router-dom": "^5.0.0",
+        "redux": "^4.1.1",
+        "redux-observable": "^2.0.0",
+        "redux-thunk": "^2.4.0",
+        "rxjs": "^7.4.0",
+        "sass": "^1.43.2",
+        "sass-loader": "^12.2.0",
+        "style-loader": "^3.0.0",
+        "ts-loader": "^9.2.6",
+        "ts-node": "^10.3.1",
+        "tsc-prog": "^2.2.1",
+        "tsconfig-paths": "^3.11.0",
+        "tsconfig-paths-webpack-plugin": "^3.5.1",
+        "typesafe-actions": "^5.1.0",
+        "typescript": "^4.4.4",
+        "webpack": "^5.60.0",
+        "webpack-dev-server": "^4.4.0",
+        "webpack-merge": "^5.8.0",
+        "yargs": "^17.2.1"
+    }
+}
