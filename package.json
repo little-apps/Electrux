@@ -5,10 +5,10 @@
     "description": "My Electrux application description",
     "main": "./build/prod/main.js",
     "scripts": {
-        "start:dev": "cross-env NODE_ENV=development npm run start",
-        "start:prod": "cross-env NODE_ENV=production npm run start",
         "start": "ts-node --project scripts/tsconfig.json scripts/index.ts start",
         "compile": "ts-node --project scripts/tsconfig.json scripts/index.ts compile",
+        "start:dev": "cross-env NODE_ENV=development npm run start",
+        "start:prod": "cross-env NODE_ENV=production npm run start",
         "compile:dev": "cross-env NODE_ENV=development npm run compile -- all",
         "compile:prod": "cross-env NODE_ENV=production npm run compile -- all",
         "watch": "cross-env NODE_ENV=development npm run compile -- --watch=true all start",
