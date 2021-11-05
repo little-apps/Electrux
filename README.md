@@ -14,18 +14,21 @@ Electrux also uses the following technologies:
 
 ## Install
 
- 1. Clone the repository:
+ 1. Clone the repository and install dependencies:
 
 ```bash
 git clone https://github.com/little-apps/Electrux.git your-project-name
 cd your-project-name
-```
-
- 2. Install dependencies:
-
-```bash
 npm install
 ```
+
+ 2. Open Electrux (with live reloading):
+
+```bash
+npm run watch
+```
+
+ 3. Start developing!
 
 ## Docs
 
