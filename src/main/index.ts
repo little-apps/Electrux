@@ -3,6 +3,8 @@ import unhandled from 'electron-unhandled';
 import { MainWindowController } from './controllers/MainWindowController';
 import { SettingsController } from './controllers/SettingsController';
 
+console.log('👋 Hello from the main process!');
+
 unhandled();
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -45,4 +47,3 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-console.log('👋 Hello from the main process!');
