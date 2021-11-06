@@ -5,7 +5,7 @@ import buildMain from '../compilers/main';
 import buildPreload from '../compilers/preload';
 import { build as buildRenderer, watch as watchRenderer } from '../compilers/renderer';
 
-import { MODULE_MAIN, MODULE_PRELOAD, MODULE_RENDERER, DEVSERVER_OPTIONS } from '../constants';
+import { MODULE_MAIN, MODULE_PRELOAD, MODULE_RENDERER } from '../constants';
 import { attachOnElectronExit } from './start';
 
 export const modules = [MODULE_MAIN, MODULE_PRELOAD, MODULE_RENDERER] as const;
@@ -27,7 +27,7 @@ const build = async ({ modules, pkg, baseDir, watch, nodeEnv }: ICompileOptions)
 
         const outDir = path.join(baseDir, main.outDir);
 
-        const urlDev = watch ? DEVSERVER_OPTIONS.baseUrl : path.join(renderer.outDir, renderer.htmlOutput);
+        const urlDev = watch ? pkg.watch.baseUrl : path.join(renderer.outDir, renderer.htmlOutput);
         const urlProd = path.join(renderer.outDir, renderer.htmlOutput);
 
         console.log(
@@ -57,7 +57,7 @@ const build = async ({ modules, pkg, baseDir, watch, nodeEnv }: ICompileOptions)
         console.info('Building renderer...');
 
         if (watch) {
-            const devServer = DEVSERVER_OPTIONS.config;
+            const devServer = pkg.watch.webpackConfig;
             const server = await watchRenderer({ ...renderer, outDir: path.join(baseDir, renderer.outDir), devServer, nodeEnv });
 
             attachOnElectronExit(() => server.stop());

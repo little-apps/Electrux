@@ -29,6 +29,14 @@
                 "dev": "./build/dev",
                 "prod": "./build/prod"
             },
+            "watch": {
+                "webpackConfig": {
+                    "host": "127.0.0.1",
+                    "https": false,
+                    "port": 8888
+                },
+                "baseUrl": "http://127.0.0.1:8888"
+            },
             "modules": {
                 "main": {
                     "webpackPath": "./webpack.main.config.ts",
