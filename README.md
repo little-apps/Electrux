@@ -12,6 +12,8 @@ Electrux also uses the following technologies:
  * Webpack v5
  * Bootstrap v5.1
 
+![Electrux screenshot](https://github.com/little-apps/Electrux/blob/main/screenshot.png?raw=true)
+
 ## Install
 
  1. Clone the repository and install dependencies:
