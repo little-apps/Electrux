@@ -20,7 +20,7 @@ export interface ICompileOptions {
 }
 
 const build = async ({ modules, pkg, baseDir, watch, nodeEnv }: ICompileOptions) => {
-    const { main, preload, renderer } = pkg;
+    const { modules: { main, preload, renderer } } = pkg;
 
     if (modules.includes('main')) {
         console.info('Building main...');

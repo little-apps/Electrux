@@ -29,27 +29,29 @@
                 "dev": "./build/dev",
                 "prod": "./build/prod"
             },
-            "main": {
-                "webpackPath": "./webpack.main.config.ts",
-                "entry": "./src/main/index.ts",
-                "outDir": "./",
-                "tsConfigPath": "./src/main/tsconfig.json"
-            },
-            "preload": {
-                "webpackPath": "./webpack.preload.config.ts",
-                "entry": {
-                    "main": "./src/preload/main.ts"
+            "modules": {
+                "main": {
+                    "webpackPath": "./webpack.main.config.ts",
+                    "entry": "./src/main/index.ts",
+                    "outDir": "./",
+                    "tsConfigPath": "./src/main/tsconfig.json"
                 },
-                "outDir": "./preloads",
-                "tsConfigPath": "./src/preload/tsconfig.json"
-            },
-            "renderer": {
-                "webpackPath": "./webpack.renderer.config.ts",
-                "entry": "./src/renderer/index.tsx",
-                "htmlTemplate": "./src/renderer/index.html",
-                "htmlOutput": "index.html",
-                "outDir": "./renderer",
-                "tsConfigPath": "./src/renderer/tsconfig.json"
+                "preload": {
+                    "webpackPath": "./webpack.preload.config.ts",
+                    "entry": {
+                        "main": "./src/preload/main.ts"
+                    },
+                    "outDir": "./preloads",
+                    "tsConfigPath": "./src/preload/tsconfig.json"
+                },
+                "renderer": {
+                    "webpackPath": "./webpack.renderer.config.ts",
+                    "entry": "./src/renderer/index.tsx",
+                    "htmlTemplate": "./src/renderer/index.html",
+                    "htmlOutput": "index.html",
+                    "outDir": "./renderer",
+                    "tsConfigPath": "./src/renderer/tsconfig.json"
+                }
             }
         }
     },
