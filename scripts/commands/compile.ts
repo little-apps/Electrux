@@ -27,7 +27,7 @@ const build = async ({ modules, pkg, baseDir, watch, nodeEnv }: ICompileOptions)
 
         const outDir = path.join(baseDir, main.outDir);
 
-        const urlDev = watch ? pkg.watch.baseUrl : path.join(renderer.outDir, renderer.htmlOutput);
+        const urlDev = watch ? pkg.modes.watch.baseUrl : path.join(renderer.outDir, renderer.htmlOutput);
         const urlProd = path.join(renderer.outDir, renderer.htmlOutput);
 
         console.log(
@@ -57,8 +57,8 @@ const build = async ({ modules, pkg, baseDir, watch, nodeEnv }: ICompileOptions)
         console.info('Building renderer...');
 
         if (watch) {
-            const devServer = pkg.watch.webpackConfig;
-            const server = await watchRenderer({ ...renderer, outDir: path.join(baseDir, renderer.outDir), devServer, nodeEnv });
+            const { webpackConfig } = pkg.modes.watch;
+            const server = await watchRenderer({ ...renderer, outDir: path.join(baseDir, renderer.outDir), devServer: webpackConfig, nodeEnv });
 
             attachOnElectronExit(() => server.stop());
         } else {

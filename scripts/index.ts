@@ -1,5 +1,6 @@
 import yargs from 'yargs/yargs';
 import { hideBin } from 'yargs/helpers';
+
 import path from 'path';
 
 import pkg from '../package.json';
@@ -34,7 +35,7 @@ import start, { attachOnElectronExit } from './commands/start';
 
     try {
         const nodeEnv = process.env.NODE_ENV || 'development';
-        const baseDir = nodeEnv === 'development' ? electrux.outDirs.dev : electrux.outDirs.prod;
+        const baseDir = nodeEnv === 'development' ? electrux.modes.dev.outDir : electrux.modes.prod.outDir;
 
         console.info(`Build environment: ${nodeEnv}`);
 
@@ -69,7 +70,7 @@ import start, { attachOnElectronExit } from './commands/start';
             if (typeof argv.entry !== 'undefined') {
                 entry = path.resolve(__dirname, '..', argv.entry);
             } else {
-                entry = nodeEnv === 'development' ? electrux.entries.dev : electrux.entries.prod;
+                entry = nodeEnv === 'development' ? electrux.modes.dev.entry : electrux.modes.prod.entry;
             }
 
             console.info(`Entry point: ${entry}`);

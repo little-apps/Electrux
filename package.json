@@ -21,21 +21,24 @@
     "license": "MIT",
     "config": {
         "electrux": {
-            "entries": {
-                "dev": "build/dev/main.js",
-                "prod": "build/prod/main.js"
-            },
-            "outDirs": {
-                "dev": "./build/dev",
-                "prod": "./build/prod"
-            },
-            "watch": {
-                "webpackConfig": {
-                    "host": "127.0.0.1",
-                    "https": false,
-                    "port": 8888
+            "modes": {
+                "dev": {
+                    "entry": "build/dev/main.js",
+                    "outDir": "./build/dev"
                 },
-                "baseUrl": "http://127.0.0.1:8888"
+
+                "prod": {
+                    "entry": "build/prod/main.js",
+                    "outDir": "./build/prod"
+                },
+                "watch": {
+                    "webpackConfig": {
+                        "host": "127.0.0.1",
+                        "https": false,
+                        "port": 8888
+                    },
+                    "baseUrl": "http://127.0.0.1:8888"
+                }
             },
             "modules": {
                 "main": {
