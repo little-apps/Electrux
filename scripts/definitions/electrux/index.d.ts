@@ -2,17 +2,23 @@ import WebpackDevServer from 'webpack-dev-server';
 
 declare module 'electrux' {
 	export interface IPackageOptions {
-		outDirs: {
-			dev: string;
-			prod: string;
+		modes: {
+			dev: {
+				entry: string;
+				outDir: string;
+			};
+
+			prod: {
+				entry: string;
+				outDir: string;
+			};
+
+			watch: {
+				webpackConfig: WebpackDevServer.Configuration;
+				baseUrl: string;
+			};
 		};
-
-		watch: {
-			webpackConfig: WebpackDevServer.Configuration;
-			baseUrl: string;
-		};
-
-
+		
 		modules: {
 			main: {
 				webpackPath: string;
