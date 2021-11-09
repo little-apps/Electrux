@@ -2,11 +2,11 @@
 
 ## Reporting a Vulnerability
 
-First, ensure you're using the latest versions from the NodeJS Package Manager repository. You can use the ``npm up`` command to do this.
+First, ensure you're using the latest packages from the NodeJS Package Manager (NPM) repository. You can use the ``npm up`` command to update them.
 
-Next, ensure the security issue is with Electrux itself and not with any of packages it uses. If it is with a specific package, the table below lists some of the places to report the vulnerability:
+Next, ensure the security issue is with Electrux itself and not with any of packages it uses. If it is with another package, the table below lists some of the places to report the vulnerability:
 
-| Technology | Link |
+| Package | Link |
 |-|-|
 | Electron | https://github.com/electron/electron/blob/main/SECURITY.md |
 | React | https://reactjs.org/docs/how-to-contribute.html#security-bugs |
