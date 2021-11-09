@@ -11,19 +11,34 @@ export interface ICompileRendererOptions {
     outDir: string;
     webpackPath: string;
     entry: string;
-    htmlTemplate: string;
-    htmlOutput: string;
     tsConfigPath: string;
     nodeEnv: string;
+    html: {
+        template: string;
+        output: string;
+        extras?: {
+            dev?: HtmlWebpackPlugin.Options;
+            prod?: HtmlWebpackPlugin.Options;
+        };
+    };
 }
 
 export interface IWatchRendererOptions extends ICompileRendererOptions {
     devServer: WebpackDevServer.Configuration;
 }
 
-const createConfig = ({ outDir, webpackPath, entry, htmlTemplate, htmlOutput, tsConfigPath, nodeEnv }: ICompileRendererOptions) => {
+const createConfig = ({ outDir, webpackPath, entry, html, tsConfigPath, nodeEnv }: ICompileRendererOptions) => {
     const baseConfig = webpackBaseConfig(outDir, nodeEnv);
     const tsConfig = webpackTsConfig(tsConfigPath);
+
+    let htmlWebpackConfigExtra: HtmlWebpackPlugin.Options = {};
+
+    if (html.extras) {
+        if (nodeEnv === 'development' && html.extras.dev)
+            htmlWebpackConfigExtra = html.extras.dev;
+        else if (nodeEnv !== 'development' && html.extras.prod)
+            htmlWebpackConfigExtra = html.extras.prod;
+    }
 
     return merge(
         baseConfig,
@@ -34,8 +49,9 @@ const createConfig = ({ outDir, webpackPath, entry, htmlTemplate, htmlOutput, ts
             },
             plugins: [
                 new HtmlWebpackPlugin({
-                    filename: resolvePath(path.join(outDir, htmlOutput)),
-                    template: resolvePath(htmlTemplate)
+                    filename: resolvePath(path.join(outDir, html.output)),
+                    template: resolvePath(html.template),
+                    ...htmlWebpackConfigExtra
                 })
             ]
         },

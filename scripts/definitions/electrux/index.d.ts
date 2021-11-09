@@ -1,3 +1,4 @@
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackDevServer from 'webpack-dev-server';
 
 declare module 'electrux' {
@@ -37,10 +38,16 @@ declare module 'electrux' {
 			renderer: {
 				webpackPath: string;
 				entry: string;
-				htmlTemplate: string;
-				htmlOutput: string;
 				outDir: string;
 				tsConfigPath: string;
+				html: {
+					template: string;
+					output: string;
+					extras?: {
+						dev?: HtmlWebpackPlugin.Options;
+						prod?: HtmlWebpackPlugin.Options;
+					};
+				};
 			};
 		};
 

@@ -58,10 +58,18 @@
                 "renderer": {
                     "webpackPath": "./webpack.renderer.config.ts",
                     "entry": "./src/renderer/index.tsx",
-                    "htmlTemplate": "./src/renderer/index.html",
-                    "htmlOutput": "index.html",
                     "outDir": "./renderer",
-                    "tsConfigPath": "./src/renderer/tsconfig.json"
+                    "tsConfigPath": "./src/renderer/tsconfig.json",
+                    "html": {
+                        "template": "./src/renderer/index.html",
+                        "output": "index.html",
+                        "dev": {
+
+                        },
+                        "prod": {
+
+                        }
+                    }
                 }
             }
         }

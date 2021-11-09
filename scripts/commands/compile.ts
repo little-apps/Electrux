@@ -27,8 +27,8 @@ const build = async ({ modules, pkg, baseDir, watch, nodeEnv }: ICompileOptions)
 
         const outDir = path.join(baseDir, main.outDir);
 
-        const urlDev = watch ? pkg.modes.watch.baseUrl : path.join(renderer.outDir, renderer.htmlOutput);
-        const urlProd = path.join(renderer.outDir, renderer.htmlOutput);
+        const urlDev = watch ? pkg.modes.watch.baseUrl : path.join(renderer.outDir, renderer.html.output);
+        const urlProd = path.join(renderer.outDir, renderer.html.output);
 
         console.log(
             await buildMain({
