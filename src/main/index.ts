@@ -15,7 +15,7 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 const createControllers = () => {
     const mainWindowController = new MainWindowController();
 
-    ipcMain.on('settings-show', (event) => {
+    ipcMain.on('settings-show', () => {
         const settingsController = new SettingsController();
         settingsController.show();
     });
