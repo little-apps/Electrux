@@ -31,7 +31,7 @@ cd your-project-name
 npm install
 ```
 
- 2. Open Electrux (with live reloading):
+ 2. Start Electrux (with live reloading):
 
 ```bash
 npm run watch
