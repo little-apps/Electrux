@@ -31,8 +31,8 @@ import ReactDOM from "react-dom";
 
 import 'bootstrap';
 
-import 'assets/scss/app.scss';
-import App from "App";
+import '@renderer/assets/scss/app.scss';
+import App from "@renderer/App";
 
 console.log('👋 Hello from the renderer side!');
 

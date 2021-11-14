@@ -50,7 +50,5 @@ declare module 'electrux' {
 				};
 			};
 		};
-
-
 	}
 }

@@ -5,8 +5,8 @@
     "description": "My Electrux application description",
     "main": "./build/prod/main.js",
     "scripts": {
-        "compile": "ts-node --project scripts/tsconfig.json -r tsconfig-paths/register scripts/index.ts compile",
-        "start": "ts-node --project scripts/tsconfig.json -r tsconfig-paths/register scripts/index.ts start",
+        "compile": "ts-node --project ./tsconfig.json -r tsconfig-paths/register scripts/index.ts compile",
+        "start": "ts-node --project ./tsconfig.json -r tsconfig-paths/register scripts/index.ts start",
         "start:dev": "cross-env NODE_ENV=development npm run start",
         "start:prod": "cross-env NODE_ENV=production npm run start",
         "compile:dev": "cross-env NODE_ENV=development npm run compile -- all",
@@ -26,7 +26,6 @@
                     "entry": "build/dev/main.js",
                     "outDir": "./build/dev"
                 },
-
                 "prod": {
                     "entry": "build/prod/main.js",
                     "outDir": "./build/prod"
@@ -45,7 +44,7 @@
                     "webpackPath": "./webpack.main.config.ts",
                     "entry": "./src/main/index.ts",
                     "outDir": "./",
-                    "tsConfigPath": "./src/main/tsconfig.json"
+                    "tsConfigPath": "./tsconfig.json"
                 },
                 "preload": {
                     "webpackPath": "./webpack.preload.config.ts",
@@ -53,22 +52,18 @@
                         "main": "./src/preload/main.ts"
                     },
                     "outDir": "./preloads",
-                    "tsConfigPath": "./src/preload/tsconfig.json"
+                    "tsConfigPath": "./tsconfig.json"
                 },
                 "renderer": {
                     "webpackPath": "./webpack.renderer.config.ts",
                     "entry": "./src/renderer/index.tsx",
                     "outDir": "./renderer",
-                    "tsConfigPath": "./src/renderer/tsconfig.json",
+                    "tsConfigPath": "./tsconfig.json",
                     "html": {
                         "template": "./src/renderer/index.html",
                         "output": "index.html",
-                        "dev": {
-
-                        },
-                        "prod": {
-
-                        }
+                        "dev": {},
+                        "prod": {}
                     }
                 }
             }

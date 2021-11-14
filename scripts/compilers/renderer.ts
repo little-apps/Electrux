@@ -4,8 +4,8 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import WebpackDevServer from 'webpack-dev-server';
 import path from 'path';
 
-import { resolvePath } from '../utils';
-import { webpackBaseConfig, webpackTsConfig, generateMessageFromStats, handleCompileCallback } from '../webpack';
+import { resolvePath } from '@scripts/utils';
+import { webpackBaseConfig, webpackTsConfig, generateMessageFromStats, handleCompileCallback } from '@scripts/webpack';
 
 export interface ICompileRendererOptions {
     outDir: string;

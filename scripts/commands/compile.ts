@@ -1,12 +1,14 @@
-import { IPackageOptions } from 'electrux';
+
 import path from 'path';
+import { IPackageOptions } from 'electrux';
 
-import buildMain from '../compilers/main';
-import buildPreload from '../compilers/preload';
-import { build as buildRenderer, watch as watchRenderer } from '../compilers/renderer';
+import buildMain from '@scripts/compilers/main';
+import buildPreload from '@scripts/compilers/preload';
+import { build as buildRenderer, watch as watchRenderer } from '@scripts/compilers/renderer';
 
-import { MODULE_MAIN, MODULE_PRELOAD, MODULE_RENDERER } from '../constants';
-import { attachOnElectronExit } from './start';
+import { attachOnElectronExit } from '@scripts/commands/start';
+
+import { MODULE_MAIN, MODULE_PRELOAD, MODULE_RENDERER } from '@scripts/constants';
 
 export const modules = [MODULE_MAIN, MODULE_PRELOAD, MODULE_RENDERER] as const;
 export type TModule = typeof modules[number];

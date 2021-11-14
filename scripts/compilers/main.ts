@@ -2,9 +2,9 @@ import webpack from "webpack";
 import merge from 'webpack-merge';
 import path from 'path';
 
-import { resolvePath } from '../utils';
-import { TPreloadEntry } from './preload';
-import { webpackBaseConfig, webpackTsConfig, handleCompileCallback, generateMessageFromStats } from '../webpack';
+import { resolvePath } from '@scripts/utils';
+import { webpackBaseConfig, webpackTsConfig, handleCompileCallback, generateMessageFromStats } from '@scripts/webpack';
+import { TPreloadEntry } from '@scripts/compilers/preload';
 
 interface IPreloadOptions {
     baseDir: string;

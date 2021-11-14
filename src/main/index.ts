@@ -1,7 +1,8 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import unhandled from 'electron-unhandled';
-import { MainWindowController } from './controllers/MainWindowController';
-import { SettingsController } from './controllers/SettingsController';
+
+import { MainWindowController } from '@main/controllers/MainWindowController';
+import { SettingsController } from '@main/controllers/SettingsController';
 
 console.log('👋 Hello from the main side!');
 

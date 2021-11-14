@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { connect, ConnectedProps } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actions } from 'redux/store';
+import { actions } from '@renderer/redux/store';
 import { FaArrowUp } from "react-icons/fa";
 
 interface IState {

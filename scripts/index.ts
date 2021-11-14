@@ -5,9 +5,9 @@ import path from 'path';
 
 import pkg from '../package.json';
 
-import { isStatsErrors } from './webpack';
-import build, { modules, ICompileOptions, TModule } from './commands/compile';
-import start, { attachOnElectronExit } from './commands/start';
+import { isStatsErrors } from '@scripts/webpack';
+import build, { modules, ICompileOptions, TModule } from '@scripts/commands/compile';
+import start, { attachOnElectronExit } from '@scripts/commands/start';
 
 (async () => {
     const { config: { electrux } } = pkg;

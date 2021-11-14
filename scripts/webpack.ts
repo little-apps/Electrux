@@ -1,6 +1,7 @@
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import webpack from "webpack";
-import { resolvePath } from "./utils";
+
+import { resolvePath } from "@scripts/utils";
 
 export const webpackBaseConfig = (outDir: string, nodeEnv: string) => {
     const inDevMode = nodeEnv === 'development';

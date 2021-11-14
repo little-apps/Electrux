@@ -1,8 +1,8 @@
 import webpack from 'webpack';
 import merge from 'webpack-merge';
 
-import { resolvePath } from '../utils';
-import { generateMessageFromStats, handleCompileCallback, webpackBaseConfig, webpackTsConfig } from '../webpack';
+import { resolvePath } from '@scripts/utils';
+import { generateMessageFromStats, handleCompileCallback, webpackBaseConfig, webpackTsConfig } from '@scripts/webpack';
 
 export type TPreloadEntries = Record<string, string>;
 export type TPreloadEntry = TPreloadEntries | string;

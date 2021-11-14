@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { ENTRY_HTML_FILE } from './constants';
+import { ENTRY_HTML_FILE } from '@scripts/constants';
 
 export const resolvePath = (...parts: string[]) => path.resolve(process.cwd(), ...parts);
 
