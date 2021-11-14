@@ -1,8 +1,8 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow } from 'electron';
 import unhandled from 'electron-unhandled';
 
-import { MainWindowController } from '@main/controllers/MainWindowController';
-import { SettingsController } from '@main/controllers/SettingsController';
+import { windows, entry, IWindows, TEntry } from '@main/windows';
+import BaseWindow from '@main/windows/BaseWindow';
 
 console.log('👋 Hello from the main side!');
 
@@ -13,21 +13,43 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
     app.quit();
 }
 
-const createControllers = () => {
-    const mainWindowController = new MainWindowController();
+let createdWindows: BaseWindow[] = [];
 
-    ipcMain.on('settings-show', () => {
-        const settingsController = new SettingsController();
-        settingsController.show();
-    });
+/**
+ * Creates a new BaseWindow object using the name and class type.
+ *
+ * @template T
+ * @param {string} name Name of window
+ * @param {new(name: string) => T} ctor Class type with constructor that takes in name.
+ * @returns BaseWindow object
+ */
+const createWindow = <T extends BaseWindow>(name: string, ctor: new(name: string) => T) => {
+    return new ctor(name);
+};
 
-    mainWindowController.show();
+/**
+ * Creates BaseWindow objects from object and stores them in createdWindows array.
+ *
+ */
+const createWindows = (windowsToCreate: IWindows, entryWindowName: TEntry) => {
+    const windowsCreated: BaseWindow[] = [];
+
+    for (const [name, type] of Object.entries(windowsToCreate)) {
+        const window = createWindow(name, type);
+
+        if (entryWindowName === name)
+            window.show();
+
+        windowsCreated.push(window);
+    }
+
+    return windowsCreated;
 };
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createControllers);
+app.on('ready', () => createdWindows = createWindows(windows, entry));
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
@@ -42,7 +64,7 @@ app.on('activate', () => {
     // On OS X it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) {
-        createControllers();
+        createdWindows = createWindows(windows, entry);
     }
 });
 

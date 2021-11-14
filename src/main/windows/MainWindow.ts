@@ -1,9 +1,16 @@
 import { BrowserWindow } from 'electron';
 import path from 'path';
 
-import BaseController from './BaseController';
+import BaseWindow from '@main/windows/BaseWindow';
 
-export class MainWindowController extends BaseController {
+export class MainWindow extends BaseWindow {
+    constructor(name: string) {
+        super(name);
+
+        this.listener.listens({
+        });
+    }
+
     public get browserWindowOptions() {
         return {
             height: 600,

@@ -1,21 +1,27 @@
 import Electron, { app, BrowserWindow } from 'electron';
 import path from 'path';
 import urlBuilder from 'url';
+import { kebabCase } from 'string-fn'
+
+import IpcListener from '@main/ipc/IpcListener';
 
 /**
- * Base controller for Electron windows.
+ * Base for Electron windows.
  *
  * @export
  * @abstract
- * @class BaseController
+ * @class BaseWindow
  */
-export default abstract class BaseController {
+export default abstract class BaseWindow {
     protected currentWindow?: BrowserWindow;
+    protected readonly listener: IpcListener;
 
     /**
-     * Initializes the base controller by creating the browser window.
+     * Initializes the base window by creating the browser window.
      */
-    public constructor() {
+    public constructor(name: string) {
+        this.listener = new IpcListener(kebabCase(name));
+
         this.createBrowserWindow();
     }
 
@@ -25,7 +31,7 @@ export default abstract class BaseController {
      * @readonly
      * @abstract
      * @type {Electron.BrowserWindowConstructorOptions}
-     * @memberof BaseController
+     * @memberof BaseWindow
      */
     public abstract get browserWindowOptions(): Electron.BrowserWindowConstructorOptions;
 
@@ -34,7 +40,7 @@ export default abstract class BaseController {
      * @param window New BrowserWindow instance
      * @returns void
      * @public
-     * @memberof BaseController
+     * @memberof BaseWindow
      */
     public onBrowserWindowCreated(window: BrowserWindow) {
         return;
@@ -43,7 +49,7 @@ export default abstract class BaseController {
     /**
      * Shows the browser window.
      * @public
-     * @memberof BaseController
+     * @memberof BaseWindow
      */
     public show() {
         this.currentWindow?.show();
@@ -52,7 +58,7 @@ export default abstract class BaseController {
     /**
      * Creates a BrowserWindow
      * @protected
-     * @memberof BaseController
+     * @memberof BaseWindow
      */
     protected createBrowserWindow() {
         this.currentWindow = new BrowserWindow(this.browserWindowOptions);
@@ -65,7 +71,7 @@ export default abstract class BaseController {
      *
      * @protected
      * @returns Base URL
-     * @memberof BaseController
+     * @memberof BaseWindow
      */
     protected getBaseUrl() {
         const url = this.isDev() ? ELECTRUX_DEV_URL : ELECTRUX_PROD_URL;
@@ -79,7 +85,7 @@ export default abstract class BaseController {
      * @protected
      * @param {string} filePath
      * @returns
-     * @memberof BaseController
+     * @memberof BaseWindow
      */
     protected resolveUrl(filePath: string) {
         return urlBuilder.format({
@@ -93,7 +99,7 @@ export default abstract class BaseController {
      *
      * @protected
      * @returns
-     * @memberof BaseController
+     * @memberof BaseWindow
      */
     protected isDev() {
         return !app.isPackaged && ELECTRUX_ENV === 'development';

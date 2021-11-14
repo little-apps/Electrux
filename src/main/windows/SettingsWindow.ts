@@ -1,9 +1,19 @@
-import { BrowserWindow, ipcMain } from 'electron';
+import { BrowserWindow, IpcMainEvent, IpcRendererEvent } from 'electron';
 import buildUrl from 'build-url-ts';
+import settings from 'electron-settings';
 
-import BaseController from './BaseController';
+import BaseWindow from '@main/windows/BaseWindow';
 
-export class SettingsController extends BaseController {
+export class SettingsWindow extends BaseWindow {
+    constructor(name: string) {
+        super(name);
+
+        this.listener.listens({
+            'show': this.show.bind(this),
+            'set': this.set.bind(this)
+        });
+    }
+
     public get browserWindowOptions() {
         return {
             height: 600,
@@ -30,7 +40,12 @@ export class SettingsController extends BaseController {
             // Open the DevTools.
             window.webContents.openDevTools();
         }
+    }
 
-        ipcMain.on('settings-show', () => window.show());
+    public set(event?: IpcMainEvent | IpcRendererEvent, key?: string | Record<string, any>, value?: any) {
+        if (key === undefined)
+            return;
+
+        return typeof key !== 'string' ? settings.set(key) : settings.set(key, value);
     }
 }
