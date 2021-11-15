@@ -17,12 +17,16 @@ export default abstract class BaseWindow {
     protected readonly listener: IpcListener;
 
     /**
-     * Initializes the base window by creating the browser window.
+     * Creates an instance of BaseWindow.
+     * @param {string} name Name of window for IpcListener
+     * @param {boolean} [createWindow=true] Whether to create window or not.
+     * @memberof BaseWindow
      */
-    public constructor(name: string) {
+    public constructor(name: string, createWindow: boolean = true) {
         this.listener = new IpcListener(kebabCase(name));
 
-        this.currentWindow = this.createBrowserWindow();
+        if (createWindow)
+            this.currentWindow = this.createBrowserWindow();
     }
 
     /**

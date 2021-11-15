@@ -23,7 +23,7 @@ let createdWindows: BaseWindow[] = [];
  * @param {new(name: string) => T} ctor Class type with constructor that takes in name.
  * @returns BaseWindow object
  */
-const createWindow = <T extends BaseWindow>(name: string, ctor: new(name: string) => T) => {
+const createWindow = <T extends BaseWindow>(name: string, ctor: new(name: string, createWindow?: boolean) => T) => {
     return new ctor(name);
 };
 
