@@ -22,7 +22,7 @@ export default abstract class BaseWindow {
     public constructor(name: string) {
         this.listener = new IpcListener(kebabCase(name));
 
-        this.createBrowserWindow();
+        this.currentWindow = this.createBrowserWindow();
     }
 
     /**
@@ -56,14 +56,17 @@ export default abstract class BaseWindow {
     }
 
     /**
-     * Creates a BrowserWindow
+     * Creates a BrowserWindow object.
+     * @returns BrowserWindow object.
      * @protected
      * @memberof BaseWindow
      */
     protected createBrowserWindow() {
-        this.currentWindow = new BrowserWindow(this.browserWindowOptions);
+        const window = new BrowserWindow(this.browserWindowOptions);
 
-        this.onBrowserWindowCreated(this.currentWindow);
+        this.onBrowserWindowCreated(window);
+
+        return window;
     }
 
     /**
