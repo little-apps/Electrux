@@ -1,10 +1,5 @@
 # Electrux
-Electrux is a boilerplate that combines the following main technologies:
-
- * **Elec**tron
- * **T**ypeScript
- * **R**eact
- * Red**ux**
+Electrux is a boilerplate that combines **Elec**tron, **T**ypeScript, **R**eact, and Red**ux**.
 
 Electrux also uses the following technologies:
 
