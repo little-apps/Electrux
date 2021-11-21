@@ -1,8 +1,12 @@
 import { app, BrowserWindow } from 'electron';
 import unhandled from 'electron-unhandled';
 
-import { windows, entry, IWindows, TEntry } from '@main/windows';
 import BaseWindow from '@main/windows/BaseWindow';
+import { createWindows } from '@main/factories';
+import { attachListeners } from '@ipc/main';
+
+import { windows, entry } from '@constants/windows';
+import ipcs from '@constants/ipcs';
 
 console.log('👋 Hello from the main side!');
 
@@ -14,37 +18,6 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 }
 
 let createdWindows: BaseWindow[] = [];
-
-/**
- * Creates a new BaseWindow object using the name and class type.
- *
- * @template T
- * @param {string} name Name of window
- * @param {new(name: string) => T} ctor Class type with constructor that takes in name.
- * @returns BaseWindow object
- */
-const createWindow = <T extends BaseWindow>(name: string, ctor: new(name: string, createWindow?: boolean) => T) => {
-    return new ctor(name);
-};
-
-/**
- * Creates BaseWindow objects from object and stores them in createdWindows array.
- *
- */
-const createWindows = (windowsToCreate: IWindows, entryWindowName: TEntry) => {
-    const windowsCreated: BaseWindow[] = [];
-
-    for (const [name, type] of Object.entries(windowsToCreate)) {
-        const window = createWindow(name, type);
-
-        if (entryWindowName === name)
-            window.show();
-
-        windowsCreated.push(window);
-    }
-
-    return windowsCreated;
-};
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -70,3 +43,4 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+attachListeners(ipcs);

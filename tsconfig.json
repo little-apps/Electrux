@@ -44,7 +44,8 @@
                 "./scripts/typings/*",
                 "./src/main/typings/*",
                 "./src/preload/typings/*",
-                "./src/renderer/typings/*"
+                "./src/renderer/typings/*",
+                "./src/ipc/typings/*",
             ],
             "@main/*": [
                 "./src/main/*"
@@ -54,6 +55,12 @@
             ],
             "@renderer/*": [
                 "./src/renderer/*"
+            ],
+            "@ipc/*": [
+                "src/ipc/*"
+            ],
+            "@constants/*": [
+                "./src/constants/*"
             ],
             "@scripts/*": [
                 "./scripts/*"

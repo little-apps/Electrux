@@ -1,11 +1,9 @@
-import { ipcRenderer, contextBridge } from 'electron';
+import { createMainExposures } from '@ipc/preload';
+import { contextBridge } from 'electron';
+import ipcs from '@constants/ipcs';
 
 console.log('👋 Hello from the preload side!');
 
 // Define any functionality for the renderer to call in the main process.
-contextBridge.exposeInMainWorld("electron", {
-    settings: {
-        show: () => ipcRenderer.send("settings-show"),
-    }
-});
 
+contextBridge.exposeInMainWorld('electron', createMainExposures(ipcs));

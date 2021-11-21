@@ -3,14 +3,7 @@ import path from 'path';
 
 import BaseWindow from '@main/windows/BaseWindow';
 
-export class MainWindow extends BaseWindow {
-    constructor(name: string) {
-        super(name);
-
-        this.listener.listens({
-        });
-    }
-
+export default class MainWindow extends BaseWindow {
     public get browserWindowOptions() {
         return {
             height: 600,

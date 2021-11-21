@@ -1,9 +1,6 @@
 import Electron, { app, BrowserWindow } from 'electron';
 import path from 'path';
 import urlBuilder from 'url';
-import { kebabCase } from 'string-fn'
-
-import IpcListener from '@main/ipc/IpcListener';
 
 /**
  * Base for Electron windows.
@@ -14,7 +11,6 @@ import IpcListener from '@main/ipc/IpcListener';
  */
 export default abstract class BaseWindow {
     protected currentWindow?: BrowserWindow;
-    protected readonly listener: IpcListener;
 
     /**
      * Creates an instance of BaseWindow.
@@ -23,7 +19,6 @@ export default abstract class BaseWindow {
      * @memberof BaseWindow
      */
     public constructor(name: string, createWindow: boolean = true) {
-        this.listener = new IpcListener(kebabCase(name));
 
         if (createWindow)
             this.currentWindow = this.createBrowserWindow();

@@ -3,15 +3,13 @@ import buildUrl from 'build-url-ts';
 import settings from 'electron-settings';
 
 import BaseWindow from '@main/windows/BaseWindow';
+import { listen } from '@ipc/main';
 
-export class SettingsWindow extends BaseWindow {
-    constructor(name: string) {
-        super(name);
+export default class SettingsWindow extends BaseWindow {
+    constructor(name: string, createWindow: boolean = true) {
+        super(name, createWindow);
 
-        this.listener.listens({
-            'show': this.show.bind(this),
-            'set': this.set.bind(this)
-        });
+        listen('settings.show', this.show.bind(this));
     }
 
     public get browserWindowOptions() {
