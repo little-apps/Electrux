@@ -1,4 +1,3 @@
-
 import BaseWindow from "@main/windows/BaseWindow";
 
 /**
@@ -17,16 +16,13 @@ export const createWindow = <T extends BaseWindow>(name: string, ctor: new(name:
  * Creates BaseWindow objects from object and stores them in createdWindows array.
  *
  */
-export const createWindows = (windowsToCreate: TWindows, entryWindowName: TEntry) => {
-    const windowsCreated: BaseWindow[] = [];
+export const createWindows = (windowsToCreate: TWindows) => {
+    const windowsCreated: Record<string, BaseWindow> = {};
 
     for (const [name, type] of Object.entries(windowsToCreate)) {
         const window = createWindow(name, type);
 
-        if (entryWindowName === name)
-            window.show();
-
-        windowsCreated.push(window);
+        windowsCreated[name] = window;
     }
 
     return windowsCreated;

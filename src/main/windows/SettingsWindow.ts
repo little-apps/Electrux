@@ -40,6 +40,15 @@ export default class SettingsWindow extends BaseWindow {
         }
     }
 
+    /**
+     * Makes the settings window visible.
+     *
+     * @memberof SettingsWindow
+     */
+    public show() {
+        this.browserWindow?.show();
+    }
+
     public set(event?: IpcMainEvent | IpcRendererEvent, key?: string | Record<string, any>, value?: any) {
         if (key === undefined)
             return;

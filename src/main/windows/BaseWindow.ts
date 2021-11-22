@@ -10,7 +10,7 @@ import urlBuilder from 'url';
  * @class BaseWindow
  */
 export default abstract class BaseWindow {
-    protected currentWindow?: BrowserWindow;
+    private currentWindow?: BrowserWindow;
 
     /**
      * Creates an instance of BaseWindow.
@@ -46,12 +46,14 @@ export default abstract class BaseWindow {
     }
 
     /**
-     * Shows the browser window.
-     * @public
+     * Gets the current browser window.
+     *
+     * @readonly
+     * @type {(BrowserWindow | undefined)} Current BrowserWindow instance or undefined if no BrowserWindow has been created yet.
      * @memberof BaseWindow
      */
-    public show() {
-        this.currentWindow?.show();
+    public get browserWindow(): BrowserWindow | undefined {
+        return this.currentWindow;
     }
 
     /**
