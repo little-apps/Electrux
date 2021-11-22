@@ -19,6 +19,7 @@ export const listen = (channel: string, callback: TListenerCallback) => {
 /**
  * Attaches channel events to ipcMain or ipcRenderer.
  * This is to be called when Electron is started.
+ * @param {TAvailableIpcs} ipcs IPCs to listen for.
  */
 export const attachListeners = (ipcs: TAvailableIpcs) => {
 	for (const [module, channels] of Object.entries(ipcs)) {

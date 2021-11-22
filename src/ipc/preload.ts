@@ -4,6 +4,7 @@ import { generateChannelName } from "@ipc/shared";
 /**
  * Generates exposures that can be called by renderer process.
  *
+ * @param {TAvailableIpcs} ipcs IPCs to expose to the renderer process.
  * @returns Exposures that can be called in renderer process.
  */
 export const createMainExposures = (ipcs: TAvailableIpcs) => {
