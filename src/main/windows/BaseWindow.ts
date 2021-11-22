@@ -10,6 +10,7 @@ import urlBuilder from 'url';
  * @class BaseWindow
  */
 export default abstract class BaseWindow {
+    public readonly name: string;
     private currentWindow?: BrowserWindow;
 
     /**
@@ -19,6 +20,7 @@ export default abstract class BaseWindow {
      * @memberof BaseWindow
      */
     public constructor(name: string, createWindow: boolean = true) {
+        this.name = name;
 
         if (createWindow)
             this.currentWindow = this.createBrowserWindow();
