@@ -16,14 +16,18 @@ export default abstract class BaseWindow {
     /**
      * Creates an instance of BaseWindow.
      * @param {string} name Name of window for IpcListener
-     * @param {boolean} [createWindow=true] Whether to create window or not.
+     * @param {boolean} [createWindow=false] Whether to create window or not.
      * @memberof BaseWindow
      */
-    public constructor(name: string, createWindow: boolean = true) {
+    public constructor(name: string, createWindow: boolean = false) {
         this.name = name;
 
         if (createWindow)
-            this.currentWindow = this.createBrowserWindow();
+            this.create();
+    }
+
+    public create() {
+        return this.currentWindow = this.createBrowserWindow();
     }
 
     /**
@@ -51,11 +55,13 @@ export default abstract class BaseWindow {
      * Gets the current browser window.
      *
      * @readonly
-     * @type {(BrowserWindow | undefined)} Current BrowserWindow instance or undefined if no BrowserWindow has been created yet.
+     * @type {BrowserWindow} Current BrowserWindow instance or undefined if no BrowserWindow has been created yet.
      * @memberof BaseWindow
      */
-    public get browserWindow(): BrowserWindow | undefined {
-        return this.currentWindow;
+    public get browserWindow(): BrowserWindow {
+        const window = this.currentWindow ?? this.create();
+
+        return window;
     }
 
     /**
