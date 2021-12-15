@@ -7,6 +7,6 @@ import { dotCase } from 'string-fn';
  * @param {string} name
  * @returns Channel name (in dot case)
  */
-export const generateChannelName = (module:string, name: string) => {
-	return dotCase(`${module} ${name}`);
+export const generateChannelName = (...parts: string[]) => {
+	return parts.join('.');
 }

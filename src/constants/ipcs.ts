@@ -1,8 +1,11 @@
 const ipcs: TAvailableIpcs = {
-	settings: {
-		show: {
+	main: {
+		openSettings: {
 			process: 'main'
 		}
+	},
+	settings: {
+		
 	}
 };
 
