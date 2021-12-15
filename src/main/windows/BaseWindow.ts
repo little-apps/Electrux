@@ -52,6 +52,16 @@ export default abstract class BaseWindow {
     }
 
     /**
+     * Called when BrowserWindow is closed.
+     *
+     * @param {BrowserWindow} window
+     * @memberof BaseWindow
+     */
+    public onBrowserWindowClosed(window: BrowserWindow) {
+        this.currentWindow = undefined;
+    }
+
+    /**
      * Gets the current browser window.
      *
      * @readonly
@@ -74,6 +84,8 @@ export default abstract class BaseWindow {
         const window = new BrowserWindow(this.browserWindowOptions);
 
         this.onBrowserWindowCreated(window);
+
+        window.on('closed', () => this.onBrowserWindowClosed(window));
 
         return window;
     }
