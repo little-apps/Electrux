@@ -31,7 +31,7 @@ class Main extends React.Component<TProps, IState> {
     }
 
     private openSettings() {
-        window.electron.settings.show();
+        window.electron.main.openSettings();
     }
 
     public render() {

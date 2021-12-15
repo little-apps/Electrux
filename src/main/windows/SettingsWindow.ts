@@ -9,7 +9,7 @@ export default class SettingsWindow extends BaseWindow {
     constructor(name: string, createWindow: boolean = true) {
         super(name, createWindow);
 
-        listen('settings.show', this.show.bind(this));
+        listen('main.openSettings', this.show.bind(this));
     }
 
     public get browserWindowOptions() {
