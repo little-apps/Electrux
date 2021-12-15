@@ -22,7 +22,8 @@ export default class SettingsWindow extends BaseWindow {
                 nodeIntegration: false,
                 contextIsolation: true,
                 enableRemoteModule: false,
-                sandbox: true
+                sandbox: true,
+                preload: path.resolve(__dirname, ELECTRUX_PRELOAD_SETTINGS)
             }
         };
     }

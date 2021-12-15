@@ -49,7 +49,8 @@
                 "preload": {
                     "webpackPath": "./webpack.preload.config.ts",
                     "entry": {
-                        "main": "./src/preload/main.ts"
+                        "main": "./src/preload/main.ts",
+                        "settings": "./src/preload/settings.ts"
                     },
                     "outDir": "./preloads",
                     "tsConfigPath": "./tsconfig.json"
