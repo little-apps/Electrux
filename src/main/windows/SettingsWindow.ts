@@ -46,7 +46,7 @@ export default class SettingsWindow extends BaseWindow {
      * @memberof SettingsWindow
      */
     public show() {
-        this.browserWindow?.show();
+        this.browserWindow.show();
     }
 
     public set(event?: IpcMainEvent | IpcRendererEvent, key?: string | Record<string, any>, value?: any) {

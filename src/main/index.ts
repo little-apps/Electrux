@@ -23,7 +23,7 @@ const createWindowsAndShow = () => {
     createdWindows = createWindows(windows);
 
     if (entry in createdWindows)
-        createdWindows[entry].browserWindow?.show();
+        createdWindows[entry].browserWindow.show();
 }
 
 // This method will be called when Electron has finished
