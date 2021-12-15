@@ -14,7 +14,10 @@ interface IPreloadOptions {
 export interface ICompileMainOptions {
     outDir: string;
     webpackPath: string;
-    entry: string;
+    entry: {
+        electron: string;
+        window?: string;
+    };
     tsConfigPath: string;
     preload: IPreloadOptions;
     url: {
@@ -46,20 +49,25 @@ const createConfig = ({ outDir, webpackPath, entry, tsConfigPath, preload, url, 
     const baseConfig = webpackBaseConfig(outDir, nodeEnv);
     const tsConfig = webpackTsConfig(tsConfigPath);
 
+    const defines: Record<string, any> = {
+        ELECTRUX_ENV: JSON.stringify(nodeEnv),
+        ELECTRUX_DEV_URL: JSON.stringify(url.dev),
+        ELECTRUX_PROD_URL: JSON.stringify(url.prod),
+        ...createPreloadDefines(preload)
+    };
+
+    if (entry.window !== undefined)
+        defines.ELECTRUX_WINDOW_ENTRY = JSON.stringify(entry.window);
+
     return merge(
         baseConfig,
         tsConfig,
         {
             entry: {
-                main: resolvePath(entry)
+                main: resolvePath(entry.electron)
             },
             plugins: [
-                new webpack.DefinePlugin({
-                    ELECTRUX_ENV: JSON.stringify(nodeEnv),
-                    ELECTRUX_DEV_URL: JSON.stringify(url.dev),
-                    ELECTRUX_PROD_URL: JSON.stringify(url.prod),
-                    ...createPreloadDefines(preload)
-                })
+                new webpack.DefinePlugin(defines)
             ]
         },
         require(resolvePath(webpackPath)).default

@@ -42,7 +42,10 @@
             "modules": {
                 "main": {
                     "webpackPath": "./webpack.main.config.ts",
-                    "entry": "./src/main/index.ts",
+                    "entry": {
+                        "electron": "./src/main/index.ts",
+                        "window": "main"
+                    },
                     "outDir": "./",
                     "tsConfigPath": "./tsconfig.json"
                 },

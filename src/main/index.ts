@@ -3,9 +3,9 @@ import unhandled from 'electron-unhandled';
 
 import BaseWindow from '@main/windows/BaseWindow';
 import { createWindows } from '@main/factories';
+
 import { attachListeners } from '@ipc/main';
 
-import { windows, entry } from '@constants/windows';
 import * as windows from './windows';
 
 import ipcs from '@constants/ipcs';
@@ -24,8 +24,8 @@ let createdWindows: Record<string, BaseWindow> = {};
 const createWindowsAndShow = () => {
     createdWindows = createWindows(Object.values(windows));
 
-    if (entry in createdWindows)
-        createdWindows[entry].browserWindow.show();
+    if (ELECTRUX_WINDOW_ENTRY !== undefined && ELECTRUX_WINDOW_ENTRY in createdWindows)
+        createdWindows[ELECTRUX_WINDOW_ENTRY].browserWindow.show();
 }
 
 // This method will be called when Electron has finished
