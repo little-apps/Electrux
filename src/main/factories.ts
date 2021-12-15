@@ -14,7 +14,7 @@ export const createWindow = <T extends BaseWindow>(name: string, ctor: new(name:
 
 /**
  * Creates BaseWindow objects from object and stores them in createdWindows array.
- *
+ * @returns Records with name being the module name and the value the BaseWindow object.
  */
 export const createWindows = (windowsToCreate: TWindows) => {
     const windowsCreated: Record<string, BaseWindow> = {};
