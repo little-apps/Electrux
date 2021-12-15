@@ -4,30 +4,21 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import WebpackDevServer from 'webpack-dev-server';
 import path from 'path';
 
+import { IModuleRenderer } from "electrux";
 import { resolvePath } from '@scripts/utils';
 import { webpackBaseConfig, webpackTsConfig, generateMessageFromStats, handleCompileCallback } from '@scripts/webpack';
 
 export interface ICompileRendererOptions {
     outDir: string;
-    webpackPath: string;
-    entry: string;
-    tsConfigPath: string;
     nodeEnv: string;
-    html: {
-        template: string;
-        output: string;
-        extras?: {
-            dev?: HtmlWebpackPlugin.Options;
-            prod?: HtmlWebpackPlugin.Options;
-        };
-    };
+    options: IModuleRenderer;
 }
 
 export interface IWatchRendererOptions extends ICompileRendererOptions {
     devServer: WebpackDevServer.Configuration;
 }
 
-const createConfig = ({ outDir, webpackPath, entry, html, tsConfigPath, nodeEnv }: ICompileRendererOptions) => {
+const createConfig = ({ outDir, nodeEnv, options: { tsConfigPath, html, entry, webpackPath } }: ICompileRendererOptions) => {
     const baseConfig = webpackBaseConfig(outDir, nodeEnv);
     const tsConfig = webpackTsConfig(tsConfigPath);
 

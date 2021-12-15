@@ -34,7 +34,6 @@ const build = async ({ modules, pkg, baseDir, watch, nodeEnv }: ICompileOptions)
 
         console.log(
             await buildMain({
-                ...main,
                 preload: {
                     entry: preload.entry,
                     baseDir: preload.outDir
@@ -44,7 +43,8 @@ const build = async ({ modules, pkg, baseDir, watch, nodeEnv }: ICompileOptions)
                     dev: urlDev,
                     prod: urlProd
                 },
-                nodeEnv
+                nodeEnv,
+                options: main
             })
         );
     }
@@ -52,7 +52,7 @@ const build = async ({ modules, pkg, baseDir, watch, nodeEnv }: ICompileOptions)
     if (modules.includes('preload')) {
         console.info('Building preload...');
 
-        console.log(await buildPreload({ ...preload, outDir: path.join(baseDir, preload.outDir), nodeEnv }));
+        console.log(await buildPreload({ outDir: path.join(baseDir, preload.outDir), nodeEnv, options: preload }));
     }
 
     if (modules.includes('renderer')) {
@@ -60,11 +60,11 @@ const build = async ({ modules, pkg, baseDir, watch, nodeEnv }: ICompileOptions)
 
         if (watch) {
             const { webpackConfig } = pkg.modes.watch;
-            const server = await watchRenderer({ ...renderer, outDir: path.join(baseDir, renderer.outDir), devServer: webpackConfig, nodeEnv });
+            const server = await watchRenderer({ outDir: path.join(baseDir, renderer.outDir), devServer: webpackConfig, nodeEnv, options: renderer });
 
             attachOnElectronExit(() => server.stop());
         } else {
-            console.log(await buildRenderer({ ...renderer, outDir: path.join(baseDir, renderer.outDir), nodeEnv }));
+            console.log(await buildRenderer({ outDir: path.join(baseDir, renderer.outDir), nodeEnv, options: renderer }));
         }
     }
 };

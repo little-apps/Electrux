@@ -2,6 +2,7 @@ import webpack from "webpack";
 import merge from 'webpack-merge';
 import path from 'path';
 
+import { IModuleMain } from "electrux";
 import { resolvePath } from '@scripts/utils';
 import { webpackBaseConfig, webpackTsConfig, handleCompileCallback, generateMessageFromStats } from '@scripts/webpack';
 import { TPreloadEntry } from '@scripts/compilers/preload';
@@ -13,18 +14,13 @@ interface IPreloadOptions {
 
 export interface ICompileMainOptions {
     outDir: string;
-    webpackPath: string;
-    entry: {
-        electron: string;
-        window?: string;
-    };
-    tsConfigPath: string;
     preload: IPreloadOptions;
     url: {
         prod: string;
         dev: string;
     };
     nodeEnv: string;
+    options: Omit<IModuleMain, 'outDir'>;
 }
 
 const createPreloadDefines = ({ entry, baseDir }: IPreloadOptions) => {
@@ -45,9 +41,9 @@ const createPreloadDefines = ({ entry, baseDir }: IPreloadOptions) => {
     return defines;
 };
 
-const createConfig = ({ outDir, webpackPath, entry, tsConfigPath, preload, url, nodeEnv }: ICompileMainOptions) => {
+const createConfig = ({ options, outDir, preload, url, nodeEnv }: ICompileMainOptions) => {
     const baseConfig = webpackBaseConfig(outDir, nodeEnv);
-    const tsConfig = webpackTsConfig(tsConfigPath);
+    const tsConfig = webpackTsConfig(options.tsConfigPath);
 
     const defines: Record<string, any> = {
         ELECTRUX_ENV: JSON.stringify(nodeEnv),
@@ -56,21 +52,21 @@ const createConfig = ({ outDir, webpackPath, entry, tsConfigPath, preload, url, 
         ...createPreloadDefines(preload)
     };
 
-    if (entry.window !== undefined)
-        defines.ELECTRUX_WINDOW_ENTRY = JSON.stringify(entry.window);
+    if (options.entry.window !== undefined)
+        defines.ELECTRUX_WINDOW_ENTRY = JSON.stringify(options.entry.window);
 
     return merge(
         baseConfig,
         tsConfig,
         {
             entry: {
-                main: resolvePath(entry.electron)
+                main: resolvePath(options.entry.electron)
             },
             plugins: [
                 new webpack.DefinePlugin(defines)
             ]
         },
-        require(resolvePath(webpackPath)).default
+        require(resolvePath(options.webpackPath)).default
     );
 }
 
