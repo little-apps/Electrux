@@ -1,6 +1,7 @@
 import { BrowserWindow, IpcMainEvent, IpcRendererEvent } from 'electron';
 import buildUrl from 'build-url-ts';
 import settings from 'electron-settings';
+import path from 'path';
 
 import BaseWindow from '@main/windows/BaseWindow';
 import { listen } from '@ipc/main';
