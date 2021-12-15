@@ -7,8 +7,8 @@ import BaseWindow from '@main/windows/BaseWindow';
 import { listen } from '@ipc/main';
 
 export default class SettingsWindow extends BaseWindow {
-    constructor(name: string, createWindow: boolean = true) {
-        super(name, createWindow);
+    public constructor() {
+        super('settings');
 
         listen('main.openSettings', this.show.bind(this));
     }

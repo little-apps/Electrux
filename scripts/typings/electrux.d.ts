@@ -23,7 +23,10 @@ declare module 'electrux' {
 		modules: {
 			main: {
 				webpackPath: string;
-				entry: string;
+				entry: {
+					electron: string;
+					window?: string;
+				};
 				outDir: string;
 				tsConfigPath: string;
 			};

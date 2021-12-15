@@ -6,6 +6,8 @@ import { createWindows } from '@main/factories';
 import { attachListeners } from '@ipc/main';
 
 import { windows, entry } from '@constants/windows';
+import * as windows from './windows';
+
 import ipcs from '@constants/ipcs';
 
 console.log('👋 Hello from the main side!');
@@ -20,7 +22,7 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 let createdWindows: Record<string, BaseWindow> = {};
 
 const createWindowsAndShow = () => {
-    createdWindows = createWindows(windows);
+    createdWindows = createWindows(Object.values(windows));
 
     if (entry in createdWindows)
         createdWindows[entry].browserWindow.show();

@@ -4,6 +4,10 @@ import path from 'path';
 import BaseWindow from '@main/windows/BaseWindow';
 
 export default class MainWindow extends BaseWindow {
+    public constructor() {
+        super('main');
+    }
+
     public get browserWindowOptions() {
         return {
             height: 600,

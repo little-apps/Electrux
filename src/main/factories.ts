@@ -5,24 +5,24 @@ import BaseWindow from "@main/windows/BaseWindow";
  *
  * @template T
  * @param {string} name Name of window
- * @param {new(name: string) => T} ctor Class type with constructor that takes in name.
+ * @param {TWindowCtor} ctor BaseWindow constructor
  * @returns BaseWindow object
  */
-export const createWindow = <T extends BaseWindow>(name: string, ctor: new(name: string, createWindow?: boolean) => T) => {
-    return new ctor(name);
+export const createWindow = (ctor: TWindowCtor) => {
+    return new ctor();
 };
 
 /**
  * Creates BaseWindow objects from object and stores them in createdWindows array.
  * @returns Records with name being the module name and the value the BaseWindow object.
  */
-export const createWindows = (windowsToCreate: TWindows) => {
+export const createWindows = (windowsToCreate: TWindowCtor[]) => {
     const windowsCreated: Record<string, BaseWindow> = {};
 
-    for (const [name, type] of Object.entries(windowsToCreate)) {
-        const window = createWindow(name, type);
+    for (const windowCtor of windowsToCreate) {
+        const window = createWindow(windowCtor);
 
-        windowsCreated[name] = window;
+        windowsCreated[window.name] = window;
     }
 
     return windowsCreated;
