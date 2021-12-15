@@ -11,7 +11,7 @@ import { webpackBaseConfig, webpackTsConfig, generateMessageFromStats, handleCom
 export interface ICompileRendererOptions {
     outDir: string;
     nodeEnv: string;
-    options: IModuleRenderer;
+    options: Omit<IModuleRenderer, 'outDir'>;
 }
 
 export interface IWatchRendererOptions extends ICompileRendererOptions {
