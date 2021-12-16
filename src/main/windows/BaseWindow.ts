@@ -91,10 +91,10 @@ export default abstract class BaseWindow {
     }
 
     /**
-     * Gets the base URL for the controllers.
+     * Gets the base URL.
      *
      * @protected
-     * @returns Base URL
+     * @returns Either the URL to the Webpack Dev Server (if in watch mode) or the relative path to the index.html file.
      * @memberof BaseWindow
      */
     protected getBaseUrl() {
