@@ -3,10 +3,9 @@ import { ThunkDispatch, ActionType } from 'redux-thunk';
 
 export interface IElectronAPI {
     main: {
-        openSettings: () => void;
     };
     settings: {
-        show: () => void;
+        open: () => void;
         set: (key: string | Record<string, any>, value?: any) => Promise<void>;
         has: (key: string) => Promise<boolean>;
         get: (key?: string) => Promise<any>;
