@@ -3,7 +3,14 @@ import webpack from "webpack";
 
 import { resolvePath } from "@scripts/utils";
 
-export const webpackBaseConfig = (outDir: string, nodeEnv: string) => {
+/**
+ * Generates the Webpack configuration to be used by all modules.
+ *
+ * @param {string} outDir
+ * @param {string} nodeEnv
+ * @returns Webpack configuration
+ */
+const webpackBaseConfig = (outDir: string, nodeEnv: string) => {
     const inDevMode = nodeEnv === 'development';
 
     const config: webpack.Configuration = {
@@ -32,7 +39,13 @@ export const webpackBaseConfig = (outDir: string, nodeEnv: string) => {
     return config;
 };
 
-export const webpackTsConfig = (tsConfigPath: string) => ({
+/**
+ * Generates Webpack configuration so Typescript files are compiled.
+ *
+ * @param {string} tsConfigPath Relative path to tsconfig.json file.
+ * @return Webpack configuration
+ */
+const webpackTsConfig = (tsConfigPath: string) => ({
     module: {
         rules: [
             {
@@ -54,7 +67,13 @@ export const webpackTsConfig = (tsConfigPath: string) => ({
     },
 });
 
-export const generateMessageFromStats = (stats: webpack.Stats) => {
+/**
+ * Generates a message from Webpack stats.
+ *
+ * @param {webpack.Stats} stats
+ * @returns Message to be displayed.
+ */
+const generateMessageFromStats = (stats: webpack.Stats) => {
 	const info = stats.toJson();
 	let message = '';
 
@@ -67,7 +86,14 @@ export const generateMessageFromStats = (stats: webpack.Stats) => {
 	return message;
 }
 
-export const handleCompileCallback = async (err?: Error, stats?: webpack.Stats) => {
+/**
+ * Changes Webpack callback into a Promise.
+ *
+ * @param {Error} [err]
+ * @param {webpack.Stats} [stats]
+ * @returns Resolved promise with stats or rejection with error.
+ */
+const handleCompileCallback = async (err?: Error, stats?: webpack.Stats) => {
     return new Promise<webpack.Stats | undefined>((resolve, reject) => {
         if (err) {
             reject(err.stack ? new Error(err.stack) : err);
@@ -85,7 +111,13 @@ export const handleCompileCallback = async (err?: Error, stats?: webpack.Stats) 
     });
 }
 
-export const isStatsErrors = (obj: any): obj is webpack.StatsError[] => {
+/**
+ * Checks if variable is an an array of Webpack stats errors.
+ *
+ * @param {*} obj
+ * @returns {obj is webpack.StatsError[]}
+ */
+const isStatsErrors = (obj: any): obj is webpack.StatsError[] => {
     if (Array.isArray(obj)) {
         if (obj.length === 0)
             return true;
@@ -96,9 +128,24 @@ export const isStatsErrors = (obj: any): obj is webpack.StatsError[] => {
     return false;
 };
 
-export const isStatsError = (obj: any): obj is webpack.StatsError => {
+/**
+ * Checks if object is a Webpack stats error.
+ *
+ * @param {*} obj
+ * @returns {obj is webpack.StatsError}
+ */
+const isStatsError = (obj: any): obj is webpack.StatsError => {
     return (
         typeof obj === 'object' &&
         ('message' in obj && typeof obj.message === 'string')
     );
+};
+
+export {
+    webpackBaseConfig,
+    webpackTsConfig,
+    generateMessageFromStats,
+    handleCompileCallback,
+    isStatsErrors,
+    isStatsError
 };
