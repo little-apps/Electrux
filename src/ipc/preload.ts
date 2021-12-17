@@ -13,6 +13,9 @@ export const createExposures = (ipcs: TAvailableIpcs, ...modules: (keyof TAvaila
 	for (const module of modules) {
 		exposures[module] = {};
 
+		if (typeof ipcs[module] !== 'object')
+			continue;
+
 		for (const [name,] of Object.entries(ipcs[module])) {
 			const channel = generateChannelName(module, name);
 
