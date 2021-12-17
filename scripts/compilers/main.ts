@@ -24,21 +24,15 @@ export interface ICompileMainOptions {
 }
 
 const createPreloadDefines = ({ entry, baseDir }: IPreloadOptions) => {
-    const defines: Record<string, string> = {};
+    const preloads: Record<string, string> = {};
 
-    if (typeof entry === 'string') {
-        const { name } = path.parse(entry);
+    for (const [key, value] of Object.entries(entry)) {
+        const { name } = path.parse(value);
 
-        defines.ELECTRUX_PRELOAD = JSON.stringify(path.join(baseDir, `${name}.js`));
-    } else {
-        for (const [key, value] of Object.entries(entry)) {
-            const { name } = path.parse(value);
-
-            defines[`ELECTRUX_PRELOAD_${key.toUpperCase()}`] = JSON.stringify(path.join(baseDir, `${name}.js`));
-        }
+        preloads[key]  = path.join(baseDir, `${name}.js`);
     }
 
-    return defines;
+    return preloads;
 };
 
 const createConfig = ({ options, outDir, preload, url, nodeEnv }: ICompileMainOptions) => {
@@ -49,7 +43,7 @@ const createConfig = ({ options, outDir, preload, url, nodeEnv }: ICompileMainOp
         ELECTRUX_ENV: JSON.stringify(nodeEnv),
         ELECTRUX_DEV_URL: JSON.stringify(url.dev),
         ELECTRUX_PROD_URL: JSON.stringify(url.prod),
-        ...createPreloadDefines(preload)
+        ELECTRUX_PRELOADS: JSON.stringify(createPreloadDefines(preload))
     };
 
     if (options.entry.window !== undefined)

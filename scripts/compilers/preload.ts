@@ -6,7 +6,7 @@ import { resolvePath } from '@scripts/utils';
 import { generateMessageFromStats, handleCompileCallback, webpackBaseConfig, webpackTsConfig } from '@scripts/webpack';
 
 export type TPreloadEntries = Record<string, string>;
-export type TPreloadEntry = TPreloadEntries | string;
+export type TPreloadEntry = TPreloadEntries;
 
 export interface ICompilePreloadOptions {
     outDir: string;

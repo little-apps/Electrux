@@ -17,7 +17,7 @@ export default class MainWindow extends BaseWindow {
                 contextIsolation: true,
                 enableRemoteModule: false,
                 sandbox: true,
-                preload: path.resolve(__dirname, ELECTRUX_PRELOAD_MAIN)
+                preload: path.resolve(__dirname, ELECTRUX_PRELOADS.main)
             }
         };
     }
