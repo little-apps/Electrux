@@ -9,7 +9,7 @@ const moduleListeners: Record<string, TListenerCallback[]> = {};
  * @param {string} channel
  * @param {TListenerCallback} callback
  */
-export const listen = (channel: string, callback: TListenerCallback) => {
+export const attach = (channel: string, callback: TListenerCallback) => {
 	if (!(channel in moduleListeners))
 		moduleListeners[channel] = [];
 

@@ -4,13 +4,13 @@ import settings from 'electron-settings';
 import path from 'path';
 
 import BaseWindow from '@main/windows/BaseWindow';
-import { listen } from '@ipc/main';
+import { attach } from '@ipc/main';
 
 export default class SettingsWindow extends BaseWindow {
     public constructor() {
         super('settings');
 
-        listen('settings.open', this.show.bind(this));
+        attach('settings.open', this.show.bind(this));
     }
 
     public get browserWindowOptions() {
