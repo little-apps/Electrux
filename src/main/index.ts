@@ -3,10 +3,9 @@ import unhandled from 'electron-unhandled';
 
 import BaseWindow from '@main/windows/BaseWindow';
 import { createWindows } from '@main/factories';
+import * as windows from '@main/windows';
 
 import { attachListeners } from '@ipc/main';
-
-import * as windows from './windows';
 
 import ipcs from '@constants/ipcs';
 
